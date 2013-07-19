@@ -3,11 +3,25 @@
 #include <stdio.h>
 #include <string>
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
 /*
  Tutorial from: http://antongerdelan.net/opengl/hellotriangle.html
  */
 int main() {
+        std::ifstream inputFile;
+        inputFile.open("shaders/test_vs.glsl");
+        inputFile.seekg(0, inputFile.end);
+        int length = inputFile.tellg();
+        inputFile.seekg(0, inputFile.beg);
+        
+        char *buffer = new char[length];
+        inputFile.read(buffer, length);
+        std::string fileContents(buffer);
+        
+        printf("%s\n", fileContents.c_str());
+    
 	glfwInit();
 	
 	int major = 3;
